@@ -101,15 +101,52 @@
 <body>
 <div class="wrap">
     <div class="jumbotron">
-        <h1 class="display-4">My Worthy Software</h1>
-        <p class="lead">비즈니스에 도움이 되는 소프트웨어 추천!</p>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">카테고리</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">영업/마케팅<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">협업/생산성</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">교육</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">프로젝트 관리</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">분석</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">디자인</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+            </div>
+        </nav>
+        <br/>
+
+        <h1 class="display-4">비즈니스 소프트웨어 추천</h1>
         <hr class="my-4">
         <p class="lead">
-            <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">추천 소프트웨어 등록
+            <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary" style="float: right">
+                추천 소프트웨어 등록
             </button>
         </p>
-    </div>
 
+    </div>
 
     <div id="post-box" class="form-post" style="display:none">
         <div>
@@ -174,39 +211,31 @@
                 <input id="logoimage-url" class="form-control" placeholder="">
             </div>
 
-
             <button type="button" class="btn btn-primary">내용 저장</button>
         </div>
     </div>
-<!--    -->
-<!--    <div class="media">-->
-<!--  <img src="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png" class="mr-3" alt="...">-->
-<!--  <div class="media-body">-->
-<!--    <h5 class="mt-0">slack</h5>-->
-<!--    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.-->
-<!--    <a href="#" class="card-link">구글플레이 다운</a>-->
-<!--    <a href="#" class="card-link">앱스토어 다운</a>-->
-<!--    <a href="#" class="btn btn-primary">웹사이트 방문</a>-->
-<!--  </div>-->
 
-
-<div class="card mb-3" style="max-width: 900px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png" class="card-img" alt="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png">
+    <div class="card mb-3" style="max-width: 900px;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img src="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png" class="card-img"
+                         alt="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png">
+                </div>
+                <div class="col-6">
+                    <h5 class="card-title">Slack</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <div class="col" style="text-align: right; margin-top: 10px;">
+                    <a href="#" class="btn btn-primary">웹사이트 방문</a><br/>
+                    <a href="#" class="card-link">구글플레이 다운</a><br/>
+                    <a href="#" class="card-link">앱스토어 다운</a><br/>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <a href="#" class="btn btn-primary" style="float: right">웹사이트 방문</a>
-        <h5 class="card-title">Slack</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          <a href="#" class="card-link" style="float: right">구글플레이 다운</a><br/>
-          <a href="#" class="card-link" style="float: right">앱스토어 다운</a><br/>
-
-      </div>
-    </div>
-  </div>
 </div>
 
 </html>
