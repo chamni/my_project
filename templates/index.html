@@ -18,7 +18,7 @@
             crossorigin="anonymous"></script>
 
     <!-- 구글폰트 -->
-    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
 
 
     <title>My Worthy Software | 비즈니스 소프트웨어 추천</title>
@@ -40,12 +40,13 @@
         }
 
         #post-box {
-            width: 650px;
+            width: 760px;
             margin: 20px auto;
             padding: 50px;
             border: lightslategray solid;
             border-radius: 2px;
         }
+
     </style>
     <script>
         $(document).ready(function () {
@@ -56,29 +57,56 @@
         function showPost() {
             $.ajax({
                 type: "GET",
-                url: "http://spartacodingclub.shop/post",
+                url: "/memo",
                 data: {},
                 success: function (response) {
-                    let articles = response["articles"];
-                    for (let i = 0; i < articles.length; i++) {
-                        let article = articles[i];
-                        makeCard(article["image"], article["url"], article["title"], article["desc"], article["comment"]);
+                    let softwares = response["softwares"];
+                    for (let i = 0; i < softwares.length; i++) {
+                        let software = softwares[i];
+                        makeCard(software["name"], software["category"], software["comment"], software["homepage"], software["gwdown"], software["asdown"], software["image"]);
                     }
                 }
             });
         }
 
-        function makeCard(image, url, title, desc, comment) {
-            let tempHtml = `<div class="card">
-                                <img class="card-img-top" src="${image}" alt="Card image cap">
-                                <div class="card-body">
-                                    <a href="${url}" target="_blank" class="card-title">${title}</a>
-                                    <p class="card-text">${desc}</p>
-                                    <p class="card-text comment">${comment}</p>
+        function makeCard(name, inlineRadioOptions, software_comment, homepage_url, gp_url, appstore_url, logoimage_url) {
+            let tempHtml = `<div class="row">
+                                <div class="col">
+                                    <img src="${logoimage_url}" class="card-img"
+                                         alt="${logoimage_url}">
                                 </div>
-                            </div>`;
-            $("#cards-box").append(tempHtml);
+                                <div class="col-6">
+                                    <h5 class="card-title">${name}</h5>
+                                    <p class="card-text">${inlineRadioOptions}</p>
+                                    <p class="card-text">${software_comment}</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                                <div class="col" style="text-align: right; margin-top: 10px;">
+                                    <a href="${homepage_url}" class="btn btn-primary">웹사이트 방문</a><br/>
+                                    <a href="${gp_url}" class="card-link">구글플레이 다운</a><br/>
+                                    <a href="${appstore_url}" class="card-link">앱스토어 다운</a><br/>
+                                </div>
+                            </div>`
+            $("#cards-box").prepend(tempHtml);
         }
+
+        function postsoftware() {
+                  $.ajax({
+                    type: "POST",
+                    url: "/memo",
+                    data: {name_give:$('#name').val(), category_give:$("input[name='inlineRadioOptions']:checked").val(), comment_give:$('#software_comment').val(), homepage_give: $('#homepage_url').val(), gpdown_give:$('#gp_url').val(), asdown_give:$('#appstore_url').val(), image_give:$('#logoimage_url').val()},
+                    success: function (response) { // 성공하면
+                      if (response["result"] == "success") {
+                        alert("성공!");
+                        window.location.reload();
+                      } else {
+                          alert("다시!!")
+                      }
+
+                    }
+                  })
+                }
+
 
         function openClose() {
             // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
@@ -129,11 +157,6 @@
                     </li>
                 </ul>
 
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-
             </div>
         </nav>
         <br/>
@@ -151,88 +174,74 @@
     <div id="post-box" class="form-post" style="display:none">
         <div>
             <div class="form-group">
-                <label for="post-url">소프트웨어 이름</label>
-                <input id="post-url" class="form-control" placeholder="">
+                <label for="name">소프트웨어 이름</label>
+                <input id="name" class="form-control" placeholder="">
             </div>
-            <label for="post-url">카테고리</label><br/>
+                <label for="category">카테고리</label><br/>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                       value="option1">
+                       value="영업/마케팅">
                 <label class="form-check-label" for="inlineRadio1">영업/마케팅</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                       value="option2">
+                       value="협업/생산성">
                 <label class="form-check-label" for="inlineRadio2">협업/생산성</label>
             </div>
 
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                       value="option1">
+                       value="교육">
                 <label class="form-check-label" for="inlineRadio1">교육</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                       value="option2">
+                       value="프로젝트 관리">
                 <label class="form-check-label" for="inlineRadio2">프로젝트 관리</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                       value="option1">
+                       value="분석">
                 <label class="form-check-label" for="inlineRadio1">분석</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                       value="option2">
+                       value="디자인">
                 <label class="form-check-label" for="inlineRadio2">디자인</label>
             </div>
             <div class="form-group">
-                <label for="post-comment">소프트웨어 설명</label>
-                <textarea class="form-control" rows="2"></textarea>
+                <label for="software_comment">소프트웨어 설명</label>
+                <textarea id="software_comment" class="form-control" rows="2"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="homepage-url">홈페이지 URL</label>
-                <input id="homepage-url" class="form-control" placeholder="">
+                <label for="homepage_url">홈페이지 URL</label>
+                <input id="homepage_url" class="form-control" placeholder="">
             </div>
 
             <div class="form-group">
-                <label for="googleplay-url">Google play 다운로드 주소</label>
-                <input id="googleplay-url" class="form-control" placeholder="">
+                <label for="gp_url">Google play 다운로드 주소</label>
+                <input id="gp_url" class="form-control" placeholder="">
             </div>
 
             <div class="form-group">
-                <label for="appstore-url">App store 다운로드 주소</label>
-                <input id="appstore-url" class="form-control" placeholder="">
+                <label for="appstore_url">App store 다운로드 주소</label>
+                <input id="appstore_url" class="form-control" placeholder="">
             </div>
 
             <div class="form-group">
-                <label for="logoimage-url">로고 이미지주소</label>
-                <input id="logoimage-url" class="form-control" placeholder="">
+                <label for="logoimage_url">로고 이미지주소</label>
+                <input id="logoimage_url" class="form-control" placeholder="">
             </div>
 
-            <button type="button" class="btn btn-primary">내용 저장</button>
+            <button type="button" class="btn btn-primary" onclick="postsoftware()">내용 저장</button>
         </div>
     </div>
 
     <div class="card mb-3" style="max-width: 900px;">
-        <div class="container">
+        <div class="container" id="cards-box">
             <div class="row">
-                <div class="col">
-                    <img src="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png" class="card-img"
-                         alt="https://miro.medium.com/max/694/1*sTNpuEytd-slyqS2TVEbmA.png">
-                </div>
-                <div class="col-6">
-                    <h5 class="card-title">Slack</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-                <div class="col" style="text-align: right; margin-top: 10px;">
-                    <a href="#" class="btn btn-primary">웹사이트 방문</a><br/>
-                    <a href="#" class="card-link">구글플레이 다운</a><br/>
-                    <a href="#" class="card-link">앱스토어 다운</a><br/>
-                </div>
+
             </div>
         </div>
     </div>
